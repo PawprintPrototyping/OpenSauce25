@@ -1,0 +1,40 @@
+
+teachable ploc cake1_up
+teachable ploc cake2_up
+teachable ploc cake3_up
+
+int cake_depth = 150  ;; mm
+int cake_radius = 150  ;; mm
+
+int jog_speed = 10;
+int cut_speed = 50;
+int pullout_speed = 5
+
+sub cut_slice(ploc start_point)
+    speed(jog_speed)
+    move(start_point)
+
+    ;; plunge
+    speed(cut_speed)
+    txs(cake_depth)
+    
+    ;; pull out
+    speed(pullout_speed)
+    tzs(cake_radius / 2)
+    speed(jog_speed)
+
+    ;; move up
+    move(start_point)
+end sub
+
+main
+    speed(jog_speed)
+    print("Cut cake? ")
+    readline($str, 10)
+
+    ;; plunge cut
+    move(cake1_up)
+    cut_slice(
+    
+end main
+
