@@ -52,7 +52,7 @@ jobs:
         if: ${{ failure() && steps.erc.conclusion == 'failure' }}
         with:
           name: erc.rpt
-          path: ${{ github.workspace }}/erc.rpt
+          path: ${{ github.workspace }}/schematics/erc.rpt
 
       # Upload DRC report only if DRC failed
       - name: Upload DRC report
@@ -60,4 +60,4 @@ jobs:
         if: ${{ failure() && steps.drc.conclusion == 'failure' }}
         with:
           name: drc.rpt
-          path: ${{ github.workspace }}/drc.rpt
+          path: ${{ github.workspace }}/schematics/drc.rpt
