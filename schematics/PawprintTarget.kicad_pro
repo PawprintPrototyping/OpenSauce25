@@ -244,7 +244,24 @@
     "equivalence_files": []
   },
   "erc": {
-    "erc_exclusions": [],
+    "erc_exclusions": [
+      [
+        "pin_not_connected|2082800|1511300|c7f147a3-b67a-4b73-9fe0-1e3462f72c83|00000000-0000-0000-0000-000000000000|/bf8ec27c-ff5f-49a5-86e3-ca23713e8dc9|/bf8ec27c-ff5f-49a5-86e3-ca23713e8dc9|",
+        "NC"
+      ],
+      [
+        "pin_not_connected|2235200|1511300|6b4954c4-3fd7-4754-b611-dc8ca8620160|00000000-0000-0000-0000-000000000000|/bf8ec27c-ff5f-49a5-86e3-ca23713e8dc9|/bf8ec27c-ff5f-49a5-86e3-ca23713e8dc9|",
+        "NC"
+      ],
+      [
+        "pin_to_pin|1244600|520700|d529962c-a4ba-4a6d-b0ec-5d3da1b2f2ee|7e5438cc-d849-45f7-a122-7d1a71607ef1|/bf8ec27c-ff5f-49a5-86e3-ca23713e8dc9|/bf8ec27c-ff5f-49a5-86e3-ca23713e8dc9|/bf8ec27c-ff5f-49a5-86e3-ca23713e8dc9",
+        "Ardunio backfed with 5V externally"
+      ],
+      [
+        "power_pin_not_driven|1168400|520700|5f1b1e5c-02ca-47a2-bcd0-be99c4bb201a|00000000-0000-0000-0000-000000000000|/bf8ec27c-ff5f-49a5-86e3-ca23713e8dc9|/bf8ec27c-ff5f-49a5-86e3-ca23713e8dc9|",
+        "Arduino backfed with 5V"
+      ]
+    ],
     "meta": {
       "version": 0
     },
