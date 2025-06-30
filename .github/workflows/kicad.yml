@@ -26,16 +26,16 @@ jobs:
         with:
           name: Production files
           path: |
-            ${{ github.workspace }}/sch.pdf
-            ${{ github.workspace }}/bom.csv
-            ${{ github.workspace }}/gbr.zip
+            ${{ github.workspace }}/schematics/sch.pdf
+            ${{ github.workspace }}/schematics/bom.csv
+            ${{ github.workspace }}/schematics/gbr.zip
 
       - name: Run KiCad ERC
         id: erc
         uses: sparkengineering/kicad-action@v4
         if: '!cancelled()'
         with:
-          kicad_sch: my-project.kicad_sch
+          kicad_sch: schematics/PawprintTarget.kicad_sch
           sch_erc: true
 
       - name: Run KiCad DRC
@@ -43,7 +43,7 @@ jobs:
         uses: sparkengineering/kicad-action@v4
         if: '!cancelled()'
         with:
-          kicad_pcb: my-project.kicad_pcb
+          kicad_pcb: schematics/PawprintTarget.kicad_pcb
           pcb_drc: true
 
       # Upload ERC report only if ERC failed
