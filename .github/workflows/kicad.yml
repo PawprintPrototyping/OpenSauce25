@@ -32,7 +32,7 @@ jobs:
 
       - name: Run KiCad ERC
         id: erc
-        uses: sparkengineering/kicad-action@v4
+        uses: rechner/kicad-action@main
         if: '!cancelled()'
         with:
           kicad_sch: schematics/PawprintTarget.kicad_sch
@@ -40,7 +40,7 @@ jobs:
 
       - name: Run KiCad DRC
         id: drc
-        uses: sparkengineering/kicad-action@v4
+        uses: rechner/kicad-action@main
         if: '!cancelled()'
         with:
           kicad_pcb: schematics/PawprintTarget.kicad_pcb
@@ -61,3 +61,20 @@ jobs:
         with:
           name: drc.rpt
           path: ${{ github.workspace }}/schematics/drc.rpt
+
+      # Output job summary
+      - name: Output job summary
+        run: |-
+          echo "| Job | Status | Summary |" >> $GITHUB_STEP_SUMMARY
+          echo "|-----|--------|---------|" >> $GITHUB_STEP_SUMMARY
+          if [[ ${{ steps.erc.outputs.erc_violation }} -ne 0 ]]; then
+            echo "|ERC|✅ Pass||"
+          else
+            echo "|ERC|❌ Fail|${{ steps.erc.outputs.erc_message }}"
+          fi
+          if [[ ${{ steps.drc.outputs.drc_violation }} -ne 0 ]]; then
+            echo "|DRC|✅ Pass||"
+          else
+            echo "|DRC|❌ Fail|${{ steps.erc.outputs.drc_message }}"
+          fi
+          echo "|----|--------|----------|" >> $GITHUB_STEP_SUMMARY
