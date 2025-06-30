@@ -65,16 +65,18 @@ jobs:
       # Output job summary
       - name: Output job summary
         run: |-
+          echo "Generating job summary"
+          echo "::warning testing"
           echo "| Job | Status | Summary |" >> $GITHUB_STEP_SUMMARY
           echo "|-----|--------|---------|" >> $GITHUB_STEP_SUMMARY
           if [[ ${{ steps.erc.outputs.erc_violation }} -ne 0 ]]; then
-            echo "|ERC|✅ Pass||"
+            echo "|ERC|✅ Pass||" >> $GITHUB_STEP_SUMMARY
           else
-            echo "|ERC|❌ Fail|${{ steps.erc.outputs.erc_message }}"
+            echo "|ERC|❌ Fail|${{ steps.erc.outputs.erc_message }}" >> $GITHUB_STEP_SUMMARY
           fi
           if [[ ${{ steps.drc.outputs.drc_violation }} -ne 0 ]]; then
-            echo "|DRC|✅ Pass||"
+            echo "|DRC|✅ Pass||" >> $GITHUB_STEP_SUMMARY
           else
-            echo "|DRC|❌ Fail|${{ steps.erc.outputs.drc_message }}"
+            echo "|DRC|❌ Fail|${{ steps.erc.outputs.drc_message }}" >> $GITHUB_STEP_SUMMARY
           fi
           echo "|----|--------|----------|" >> $GITHUB_STEP_SUMMARY
