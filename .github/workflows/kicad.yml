@@ -37,6 +37,11 @@ jobs:
             ${{ github.workspace }}/schematics/bom.csv
             ${{ github.workspace }}/schematics/gbr.zip
 
+      - name: Annotate
+        run: |
+            echo "::warning title=Foxpiler warning::Not foxy enough"
+            echo "### Hello world! :rocket:" >> $GITHUB_STEP_SUMMARY
+
       - name: Run KiCad ERC
         id: erc
         uses: rechner/kicad-action@main
@@ -52,11 +57,6 @@ jobs:
         with:
           kicad_pcb: schematics/PawprintTarget.kicad_pcb
           pcb_drc: true
-
-      - name: Job summary
-        id: summary
-        run: |
-          echo "### Job Summary :rocket:" >> $GITHUB_STEP_SUMMARY
 
       - name: Output job summary
         run: |
