@@ -31,7 +31,7 @@ jobs:
         uses: actions/upload-artifact@v4
         if: ${{ !cancelled() && steps.production.conclusion == 'success' }}
         with:
-          name: PawprintTarget-{{ steps.info.outputs.sha_short }}{{ steps.info.outputs.now }}
+          name: PawprintTarget-${{ steps.info.outputs.sha_short }}-${{ steps.info.outputs.now }}
           path: |
             ${{ github.workspace }}/schematics/sch.pdf
             ${{ github.workspace }}/schematics/bom.csv
@@ -53,6 +53,25 @@ jobs:
           kicad_pcb: schematics/PawprintTarget.kicad_pcb
           pcb_drc: true
 
+            # Output job summary
+      - name: Output job summary
+        run: |
+          echo "Generating job summary"
+          echo "### Job Summary :rocket:" >> $GITHUB_STEP_SUMMARY
+          echo "| Job | Status | Summary |" >> $GITHUB_STEP_SUMMARY
+          echo "|-----|--------|---------|" >> $GITHUB_STEP_SUMMARY
+          if [[ ${{ steps.erc.outputs.erc_violation }} -eq 0 ]]; then
+            echo "|ERC|✅ Pass||" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "|ERC|❌ Fail|${{ steps.erc.outputs.erc_message }}" >> $GITHUB_STEP_SUMMARY
+          fi
+          if [[ ${{ steps.drc.outputs.drc_violation }} -eq 0 ]]; then
+            echo "|DRC|✅ Pass||" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "|DRC|❌ Fail|${{ steps.drc.outputs.drc_message }}" >> $GITHUB_STEP_SUMMARY
+          fi
+          echo "|----|--------|----------|" >> $GITHUB_STEP_SUMMARY
+
       # Upload ERC report only if ERC failed
       - name: Upload ERC report
         uses: actions/upload-artifact@v4
@@ -68,22 +87,3 @@ jobs:
         with:
           name: drc.rpt
           path: ${{ github.workspace }}/schematics/drc.rpt
-
-      # Output job summary
-      - name: Output job summary
-        run: |
-          echo "Generating job summary"
-          echo "### Job Summary :rocket:" >> $GITHUB_STEP_SUMMARY
-          echo "| Job | Status | Summary |" >> $GITHUB_STEP_SUMMARY
-          echo "|-----|--------|---------|" >> $GITHUB_STEP_SUMMARY
-          if [[ ${{ steps.erc.outputs.erc_violation }} -ne 0 ]]; then
-            echo "|ERC|✅ Pass||" >> $GITHUB_STEP_SUMMARY
-          else
-            echo "|ERC|❌ Fail|${{ steps.erc.outputs.erc_message }}" >> $GITHUB_STEP_SUMMARY
-          fi
-          if [[ ${{ steps.drc.outputs.drc_violation }} -ne 0 ]]; then
-            echo "|DRC|✅ Pass||" >> $GITHUB_STEP_SUMMARY
-          else
-            echo "|DRC|❌ Fail|${{ steps.drc.outputs.drc_message }}" >> $GITHUB_STEP_SUMMARY
-          fi
-          echo "|----|--------|----------|" >> $GITHUB_STEP_SUMMARY
