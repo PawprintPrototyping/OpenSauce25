@@ -62,21 +62,9 @@ jobs:
           DRC_VIOLATION: ${{ steps.drc.outputs.drc_violation }}
           DRC_MESSAGE: ${{ steps.drc.outputs.drc_message }}
         run: |
-            echo "::warning title=Foxpiler warning::Not foxy enough"
-            echo "### Hello world! :rocket:" >> $GITHUB_STEP_SUMMARY
-            echo "FIY, the short sha is \`$SHA_SHORT\`, and the timestamp is \`$NOW\`" >> $GITHUB_STEP_SUMMARY
-            echo "| Job | Status | Summary |" >> $GITHUB_STEP_SUMMARY
-            echo "| --- | ------ | ------- |" >> $GITHUB_STEP_SUMMARY
-            if [[ $ERC_VIOLATION -eq 0 ]]; then
-              echo "| ERC | ✅ Pass | |" >> $GITHUB_STEP_SUMMARY
-            else
-              echo "| ERC | ❌ Fail | |" >> $GITHUB_STEP_SUMMARY
-            fi
-            if [[ $DRC_VIOLATION -eq 0 ]]; then
-              echo "| DRC | ✅ Pass | |" >> $GITHUB_STEP_SUMMARY
-            else
-              echo "| DRC | ❌ Fail | |" >> $GITHUB_STEP_SUMMARY
-            fi
+          echo "### Hello world! :rocket:" >> $GITHUB_STEP_SUMMARY
+          echo "FIY, the short sha is \`$SHA_SHORT\`, and the timestamp is \`$NOW\`" >> $GITHUB_STEP_SUMMARY
+
 
       # Upload ERC report only if ERC failed
       - name: Upload ERC report
