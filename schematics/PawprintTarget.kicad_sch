@@ -11441,7 +11441,7 @@
 				)
 			)
 		)
-		(property "Value" "2k"
+		(property "Value" "300"
 			(at 69.85 137.16 90)
 			(effects
 				(font
@@ -14232,7 +14232,7 @@
 				)
 			)
 		)
-		(property "Value" "2k"
+		(property "Value" "300"
 			(at 69.85 124.46 90)
 			(effects
 				(font
@@ -14575,7 +14575,7 @@
 				)
 			)
 		)
-		(property "Value" "2k"
+		(property "Value" "300"
 			(at 69.85 149.86 90)
 			(effects
 				(font
