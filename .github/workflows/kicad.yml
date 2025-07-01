@@ -57,8 +57,11 @@ jobs:
         run: |
             echo "::warning title=Foxpiler warning::Not foxy enough"
             echo "### Job Summary :rocket:" >> $GITHUB_STEP_SUMMARY
+            echo "Build time: ${{ steps.info.outputs.now }}" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
             echo "| Job | Status | Summary |" >> $GITHUB_STEP_SUMMARY
-            echo "|-----|--------|---------|" >> $GITHUB_STEP_SUMMARY
+            echo "| --- | ------ | ------- |" >> $GITHUB_STEP_SUMMARY
+            echo "| Foo |        |         |" >> $GITHUB_STEP_SUMMARY
 
       - name: Output job summary
         run: |
@@ -72,11 +75,10 @@ jobs:
             echo "|ERC|❌ Fail|${{ steps.erc.outputs.erc_message }}" >> $GITHUB_STEP_SUMMARY
           fi
           if [[ ${{ steps.drc.outputs.drc_violation }} -eq 0 ]]; then
-            echo "|DRC|✅ Pass||" >> $GITHUB_STEP_SUMMARY
+            echo "| DRC | ✅ Pass ||" >> $GITHUB_STEP_SUMMARY
           else
             echo "|DRC|❌ Fail|${{ steps.drc.outputs.drc_message }}" >> $GITHUB_STEP_SUMMARY
           fi
-          echo "|----|--------|----------|" >> $GITHUB_STEP_SUMMARY
 
       # Upload ERC report only if ERC failed
       - name: Upload ERC report
