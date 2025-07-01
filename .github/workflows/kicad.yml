@@ -57,11 +57,10 @@ jobs:
         run: |
             echo "::warning title=Foxpiler warning::Not foxy enough"
             echo "### Job Summary :rocket:" >> $GITHUB_STEP_SUMMARY
-            echo "Build time: ${{ steps.info.outputs.now }}" >> $GITHUB_STEP_SUMMARY
             echo "" >> $GITHUB_STEP_SUMMARY
             echo "| Job | Status | Summary |" >> $GITHUB_STEP_SUMMARY
             echo "| --- | ------ | ------- |" >> $GITHUB_STEP_SUMMARY
-            echo "| Foo |        |         |" >> $GITHUB_STEP_SUMMARY
+            echo -e "| Foo |        |         |\n" >> $GITHUB_STEP_SUMMARY
 
       - name: Output job summary
         run: |
@@ -69,15 +68,15 @@ jobs:
           echo "### Job Summary :rocket:" >> $GITHUB_STEP_SUMMARY
           echo "| Job | Status | Summary |" >> $GITHUB_STEP_SUMMARY
           echo "|-----|--------|---------|" >> $GITHUB_STEP_SUMMARY
-          if [[ ${{ steps.erc.outputs.erc_violation }} -eq 0 ]]; then
+          if [[ $KICAD_ERC_VIOLATION -eq 0 ]]; then
             echo "|ERC|✅ Pass||" >> $GITHUB_STEP_SUMMARY
           else
-            echo "|ERC|❌ Fail|${{ steps.erc.outputs.erc_message }}" >> $GITHUB_STEP_SUMMARY
+            echo "|ERC|❌ Fail|$KICAD_ERC_MESSAGE" >> $GITHUB_STEP_SUMMARY
           fi
-          if [[ ${{ steps.drc.outputs.drc_violation }} -eq 0 ]]; then
+          if [[ $KICAD_DRC_VIOLATION -eq 0 ]]; then
             echo "| DRC | ✅ Pass ||" >> $GITHUB_STEP_SUMMARY
           else
-            echo "|DRC|❌ Fail|${{ steps.drc.outputs.drc_message }}" >> $GITHUB_STEP_SUMMARY
+            echo "|DRC|❌ Fail|$KICAD_DRC_MESSAGE" >> $GITHUB_STEP_SUMMARY
           fi
 
       # Upload ERC report only if ERC failed
