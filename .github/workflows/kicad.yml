@@ -53,7 +53,11 @@ jobs:
           kicad_pcb: schematics/PawprintTarget.kicad_pcb
           pcb_drc: true
 
-            # Output job summary
+      - name: Job summary
+        id: summary
+        run: |
+          echo "### Job Summary :rocket:" >> $GITHUB_STEP_SUMMARY
+
       - name: Output job summary
         run: |
           echo "Generating job summary"
