@@ -19,12 +19,19 @@ jobs:
           kicad_pcb: schematics/PawprintTarget.kicad_pcb
           pcb_gerbers: true # Generate Gerbers
 
+      - id: info
+        env:
+          GITHUB_SHA: ${{ github.sha }}
+        run: |
+          echo "now=$(date +'%Y-%m-%dT%H-%M-%S')" >> $GITHUB_ENV >> $GITHUB_OUTPUT
+          echo "sha_short=${GITHUB_SHA::7}" >> $GITHUB_ENV >> $GITHUB_OUTPUT
+
       # Upload production files only if generation succeeded
       - name: Upload production files
         uses: actions/upload-artifact@v4
         if: ${{ !cancelled() && steps.production.conclusion == 'success' }}
         with:
-          name: Production files
+          name: PawprintTarget-{{ steps.info.outputs.sha_short }}{{ steps.info.outputs.now }}
           path: |
             ${{ github.workspace }}/schematics/sch.pdf
             ${{ github.workspace }}/schematics/bom.csv
@@ -64,7 +71,7 @@ jobs:
 
       # Output job summary
       - name: Output job summary
-        run: |-
+        run: |
           echo "Generating job summary"
           echo "### Job Summary :rocket:" >> $GITHUB_STEP_SUMMARY
           echo "| Job | Status | Summary |" >> $GITHUB_STEP_SUMMARY
