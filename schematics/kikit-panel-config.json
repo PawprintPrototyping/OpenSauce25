@@ -1,0 +1,14 @@
+{
+    "tabs": {
+        "type": "fixed",
+        "mindistance": "20mm",
+        "vcount": "8"
+    },
+    "cuts": {
+        "type": "mousebites"
+    },
+    "framing": {
+        "type": "railstb",
+        "maxtotalheight": "5m"
+    }
+}
