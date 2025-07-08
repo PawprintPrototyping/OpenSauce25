@@ -10797,7 +10797,7 @@
 				)
 			)
 		)
-		(property "Value" "R"
+		(property "Value" "390"
 			(at 203.2 63.754 90)
 			(effects
 				(font
@@ -12307,7 +12307,7 @@
 				)
 			)
 		)
-		(property "Value" "R"
+		(property "Value" "750"
 			(at 203.2 81.28 90)
 			(effects
 				(font
@@ -14020,7 +14020,7 @@
 				)
 			)
 		)
-		(property "Value" "R"
+		(property "Value" "750"
 			(at 203.2 74.422 90)
 			(effects
 				(font
@@ -14507,7 +14507,7 @@
 				)
 			)
 		)
-		(property "Value" "R"
+		(property "Value" "390"
 			(at 202.946 57.404 90)
 			(effects
 				(font
